@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "testCode": "nodemon ./testCode/testCode.js",
+    "testcode": "nodemon ../testCode/testCode.js",
     "tsc": "tsc --watch ./testCode/testCode.ts"
   },
   "private": true,
