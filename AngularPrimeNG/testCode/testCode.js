@@ -1,10 +1,4 @@
-/*
-Filename: TestCode
-Author:Michael Ganesan
-Date: 02/19/2018
-Objective: Test Code
-Note:All of this code is just test code for nodejs.
-*/
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -15,6 +9,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+exports.__esModule = true;
+/*
+Filename: TestCode
+Author:Michael Ganesan
+Date: 02/19/2018
+Objective: Test Code
+Note:All of this code is just test code for nodejs.
+*/
 var Colors;
 (function (Colors) {
     Colors[Colors["Red"] = 0] = "Red";
@@ -69,3 +71,30 @@ var printMessage = function (message, message2) {
 };
 printMessage("Michael");
 printMessage("Wow this is really cool!", "Michael");
+//Comment: This is how you use generics
+var GenericValue = /** @class */ (function () {
+    function GenericValue(value) {
+        this.value = value;
+    }
+    return GenericValue;
+}());
+var genTest = new GenericValue(21);
+genTest.increment = function (x) {
+    return (++x);
+};
+genTest.decrement = function (x) {
+    return (--x);
+};
+console.log("Value Incremented: " + genTest.increment(21));
+console.log("Value Decrement: " + genTest.decrement(21));
+var TestCode = /** @class */ (function () {
+    function TestCode(mydata) {
+        this.mydata = mydata;
+    }
+    TestCode.prototype.printData = function () {
+        console.log("this is your data " + this.mydata);
+    };
+    return TestCode;
+}());
+var myTest = new TestCode("Michael");
+myTest.printData();

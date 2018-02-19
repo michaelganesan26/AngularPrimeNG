@@ -1,3 +1,4 @@
+import { getTestBed } from '@angular/core/testing';
 
 /*
 Filename: TestCode
@@ -102,4 +103,57 @@ var printMessage: (message:string,message2?:string)=>void = (message,message2)=>
 printMessage("Michael");
 
 printMessage("Wow this is really cool!","Michael");
+
+
+//Comment: This is how you use generics
+
+class GenericValue<T>{
+  
+    increment:(x:T)=>T;
+    decrement:(x:T)=>T;
+
+    constructor(private value:T){
+
+    }
+
+}
+
+
+let genTest = new GenericValue(21);
+
+ genTest.increment = (x):number=>{
+
+        return(++x);
+ };
+
+ genTest.decrement = (x):number=>{
+      return(--x);
+
+ }
+
+ console.log(`Value Incremented: ${genTest.increment(21)}`);
+ console.log(`Value Decrement: ${genTest.decrement(21)}`);
+
+
+ class TestCode{
+   constructor(private mydata:string){}
+   printData():void{
+       
+     console.log(`this is your data ${this.mydata}`);
+
+   }
+ }
+
+ let myTest = new TestCode("Michael");
+ myTest.printData();
+
+
+
+
+
+
+
+
+
+ 
  
