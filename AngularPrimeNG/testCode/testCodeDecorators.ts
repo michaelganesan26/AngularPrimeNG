@@ -23,10 +23,21 @@ function g() {
 }
 
 
-class C{
+class testClass{
 
   @f ();
   @g (); 
+  @f() @g();
 
-  method() {}
+  method() {
+      console.log('This is an internal decorator!');
+
+  }
 }
+
+
+let x1 = new testClass();
+
+x1.method();
+
+

@@ -23,15 +23,22 @@ function g() {
         console.log('g(): called');
     };
 }
-var C = (function () {
-    function C() {
+var testClass = (function () {
+    function testClass() {
     }
-    C.prototype.method = function () { };
-    return C;
+    testClass.prototype.method = function () {
+        console.log('This is an internal decorator!');
+    };
+    return testClass;
 }());
 __decorate([
     f()
-], C.prototype, "");
+], testClass.prototype, "");
 __decorate([
     g()
-], C.prototype, "");
+], testClass.prototype, "");
+__decorate([
+    f(), g()
+], testClass.prototype, "");
+var x1 = new testClass();
+x1.method();
