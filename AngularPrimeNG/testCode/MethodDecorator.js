@@ -52,16 +52,36 @@ var trackValues2 = function (target, propertyKey, descriptor) {
     };
     return descriptor;
 };
+//Pass in optional parameters into the method decorators
+var trackValuesWithArguments = function (mode) {
+    function actualDecorator(target, propertyKey, descriptor) {
+        var oldValue = descriptor.value;
+        descriptor.value = function () {
+            //console.log(`Calling ${propertyKey} with `,arguments,target);
+            var args = Array.prototype.slice.call(arguments);
+            var a = args.map(function (a) { return JSON.stringify(a); }).join();
+            var result = oldValue.apply(this, arguments);
+            var r = JSON.stringify(result);
+            if (mode === "debug") {
+                console.log("Call: " + propertyKey + " (" + a + ") => " + r);
+            }
+            return (result);
+        };
+        return descriptor;
+    }
+    return (actualDecorator);
+};
 var JSMeetUp = /** @class */ (function () {
     function JSMeetUp() {
         this.speaker = "Ruban";
     }
+    //@trackValues2
     JSMeetUp.prototype.welcome = function (arg1, arg2) {
         console.log("Arguments received: " + arg1 + ", " + arg2);
         return (arg1 + " " + arg2);
     };
     __decorate([
-        trackValues2,
+        trackValuesWithArguments("debug"),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [String, String]),
         __metadata("design:returntype", void 0)

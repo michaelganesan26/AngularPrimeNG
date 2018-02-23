@@ -61,11 +61,39 @@ const trackValues2 = (target:Object,propertyKey:string|symbol,descriptor:Propert
     return descriptor;
 }
 
+//Pass in optional parameters into the method decorators
+const trackValuesWithArguments = (mode:string):any=>{
+  
+    function actualDecorator(target:Object,propertyKey:string|symbol,descriptor:PropertyDescriptor):any {
+        var oldValue = descriptor.value;
+        
+        descriptor.value = function(){
+              //console.log(`Calling ${propertyKey} with `,arguments,target);
+              let args = Array.prototype.slice.call(arguments);
+              var a = args.map(a=> JSON.stringify(a)).join();
+              var result = oldValue.apply(this,arguments);
+              var r = JSON.stringify(result);
+              if(mode==="debug"){
+                console.log(`Call: ${propertyKey} (${a}) => ${r}`);
+              }
+              return(result);
+            }
+        return descriptor;
+    }
+
+    return(actualDecorator);
+}
+
+
+
+
+
 
 class JSMeetUp {
     speaker: string = "Ruban";
 
-    @trackValues2
+    //@trackValues2
+    @trackValuesWithArguments("debug")
     welcome(arg1: string, arg2: string) {
 
         console.log(`Arguments received: ${arg1}, ${arg2}`);
