@@ -85,10 +85,6 @@ const trackValuesWithArguments = (mode:string):any=>{
 }
 
 
-
-
-
-
 class JSMeetUp {
     speaker: string = "Ruban";
 
